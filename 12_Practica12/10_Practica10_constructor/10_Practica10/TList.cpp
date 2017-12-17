@@ -22,20 +22,27 @@ Node::Node(const char* v) {
 	value = v;
 }
 
+Node::Node(const Node &n) {
+	value = n.value;
+	next = n.next;
+
+}
+
 TList::TList() {
 	size = 0;
 	index = 0;
 }
 
-TList::~TList() {
-	Node *actual = first;
-	for (int i = 0; i < size; i++) {
-		Node *next = actual->getNextPtr();
-		delete(actual);
-		actual = next;
+TList::TList(const TList& listB) {
+	size = 0;
+	index = 0;
+	Node *actual = listB.first;
+	for (int i = 0; i < listB.size; i++) {
+		Push(actual->getValue());
+		actual = actual->getNextPtr();
 	}
-}
 
+}
 
 int TList::Size() {
 	return size;
@@ -43,7 +50,6 @@ int TList::Size() {
 
 int TList::Push(const char *psz) {
 	Node *n = new Node(psz);
-	Node *actual = first;
 	if (size > 0) {
 		last->setNextPtr(n);
 		last = n;
@@ -93,7 +99,7 @@ const char * TList::Pop() {
 	else {
 		return "empty";
 	}
-	
+
 } // Elimina y retorna el primer elemento de la lista.
 
 void TList::Reset() {
@@ -111,4 +117,8 @@ Node* TList::getFirst() {
 }
 Node* TList::getLast() {
 	return last;
+}
+
+void TList::setLast(Node* n) {
+	last = n;
 }

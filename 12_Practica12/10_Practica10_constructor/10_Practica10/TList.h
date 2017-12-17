@@ -8,6 +8,7 @@ private:
 	Node* next;
 public:
 	Node(const char* v);
+	Node(const Node &n);
 	const char* getValue();
 	void setValue(const char* v);
 	Node* getNextPtr();
@@ -17,14 +18,13 @@ public:
 
 class TList {
 private:
-	//Node* list[100];
 	Node* first;
 	Node* last;
 	int size;
 	int index;
 public:
 	TList();
-	~TList();
+	TList(const TList& listB);
 	int Size(); // Retorna el número de elementos.
 	int Push(const char *psz); // Añade la cadena a la lista.
 	const char * First(); // retorna el primer elemento de la lista.
@@ -33,6 +33,6 @@ public:
 	void Reset(); // Elimina todos los elementos de la lista.
 	Node* getFirst();
 	Node* getLast();
-	
-};
+	void setLast(Node* n);
 
+};
